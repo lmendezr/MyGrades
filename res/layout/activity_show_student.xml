@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_padding" >
+
+    <TextView
+        android:id="@+id/display_full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/medium_separator_margin"
+        android:text="@string/hint_full_name"
+        android:textSize="@dimen/huge_font_size"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/grades_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@android:color/transparent" >
+    </ListView>
+
+</LinearLayout>

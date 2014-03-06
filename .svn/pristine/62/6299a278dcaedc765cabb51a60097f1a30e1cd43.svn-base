@@ -1,0 +1,99 @@
+package edu.uprm.ece.icom4035.gradesrollbook.activities;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
+import edu.uprm.ece.icom4035.gradesrollbook.R;
+import edu.uprm.ece.icom4035.gradesrollbook.adapters.SimpleStudentListAdapter;
+import edu.uprm.ece.icom4035.gradesrollbook.managers.GradesManager;
+import edu.uprm.ece.icom4035.gradesrollbook.managers.GradesManager.Test;
+import edu.uprm.ece.icom4035.gradesrollbook.managers.StudentManager;
+
+public class ShowStats extends Activity {
+
+	private StudentManager studentManager;
+	private GradesManager gradesManager;
+	private ListView listView;
+	private SimpleStudentListAdapter adapter;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_show_test);
+
+		// Show the Up button in the action bar.
+		setupActionBar();
+
+		populateDetails();
+	}
+
+	public void populateDetails() {
+		double roundOff;
+		studentManager = new StudentManager();
+		gradesManager = new GradesManager(studentManager.getAll());
+		TextView textView = new TextView(this);
+
+		Test currentTest = gradesManager.getAll().get(getTestIndex());
+
+		textView = (TextView) findViewById(R.id.display_name);
+		textView.setText(currentTest.getName());
+
+		textView = (TextView) findViewById(R.id.display_num_students);
+		textView.setText(((Integer) currentTest.getTimesTaken()).toString());
+
+		textView = (TextView) findViewById(R.id.display_min);
+		roundOff = Math.round(((Double) currentTest.getMin()) * 1000.0) / 1000.0;
+		textView.setText(((Double) roundOff).toString());
+
+		textView = (TextView) findViewById(R.id.display_max);
+		roundOff = Math.round(((Double) currentTest.getMax()) * 1000.0) / 1000.0;
+		textView.setText(((Double) roundOff).toString());
+
+		textView = (TextView) findViewById(R.id.display_avg);
+		roundOff = Math.round(((Double) currentTest.getAvg()) * 1000.0) / 1000.0;
+		textView.setText(((Double) roundOff).toString());
+
+		textView = (TextView) findViewById(R.id.display_std_dev);
+		roundOff = Math.round(((Double) currentTest.getStdDev()) * 1000.0) / 1000.0;
+		textView.setText(((Double) roundOff).toString());
+
+		listView = (ListView) findViewById(R.id.grades_list);
+		adapter = new SimpleStudentListAdapter(this,
+				currentTest.getStudentsTaken());
+		listView.setAdapter(adapter);
+
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}.
+	 */
+	private void setupActionBar() {
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	public int getTestIndex() {
+		return Integer.parseInt(getIntent().getStringExtra(
+				MainActivity.StatsFragment.TEST_INDEX));
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.plain_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+}

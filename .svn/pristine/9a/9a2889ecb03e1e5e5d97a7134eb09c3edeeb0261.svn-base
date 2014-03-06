@@ -1,0 +1,144 @@
+package edu.uprm.ece.icom4035.mygrades.managers;
+
+public class GradesManager {
+
+	private SortedDoublyList<Test> testsList;
+
+	public GradesManager(SortedDoublyList<Student> studentsList) {
+		int k = 0;
+		this.testsList = new SortedDoublyList<GradesManager.Test>();
+		for (Student student : studentsList) {
+			for (Grade grade : student.getGrades()) {
+				int place = -1;
+				for (int i = 0; i < this.testsList.size(); ++i) {
+					if (grade.getGradeName().equalsIgnoreCase(
+							testsList.get(i).getName())) {
+						place = i;
+					}
+				}
+				if (place == -1) {
+					testsList.add(new Test(k, student, grade));
+					k++;
+				} else {
+					testsList.get(place).addGrade(student, grade);
+				}
+			}
+		}
+	}
+
+	public SortedDoublyList<Test> getAll() {
+		return this.testsList;
+	}
+	
+	/**
+	 * Get the position of a contact in the SortedArrayList by providing it's
+	 * unique ID.
+	 * 
+	 * @param ID
+	 *            The unique identification of the desired Contact.
+	 * 
+	 * @return The position in the SortedArrayList of the desired Contact.
+	 */
+	public int getTestPosition(int ID) {
+		for (int i = 0; i < testsList.size(); ++i) {
+			if (ID == testsList.get(i).getID()) {
+				return i;
+			}
+		}
+		throw new IllegalArgumentException(
+				"ID doesn't match any contacts in the list.");
+	}
+
+	public class Test implements Comparable<Test> {
+
+		private String name;
+		private int ID;
+		private SortedDoublyList<Double> gradesList;
+		private SortedDoublyList<Student> studentsList;
+
+		public Test(int ID, Student student, Grade grade) {
+			this.ID = ID;
+			this.gradesList = new SortedDoublyList<Double>();
+			this.studentsList = new SortedDoublyList<Student>();
+			this.name = grade.getGradeName();
+			this.gradesList.add(grade.getScore());
+			
+			SortedDoublyList<Grade> contactGrade = new SortedDoublyList<Grade>();
+			contactGrade.add(grade);
+			this.studentsList.add(new Student(student.getFirstName(), student.getLastName(), contactGrade));
+		}
+
+		public String getName() {
+			return name;
+		}
+		
+		public int getID() {
+			return ID;
+		}
+
+		public SortedDoublyList<Student> getStudentsTaken() {
+			return this.studentsList;
+		}
+
+		public int getTimesTaken() {
+			return gradesList.size();
+		}
+
+		public double getMin() {
+			return gradesList.first();
+		}
+
+		public double getMax() {
+			return gradesList.last();
+		}
+
+		public double getAvg() {
+			return calcAvg(this.gradesList);
+		}
+
+		public double getStdDev() {
+			return calcStdDev(this.gradesList);
+		}
+
+		public void addGrade(Student student, Grade grade) {
+			this.gradesList.add(grade.getScore());
+			
+			SortedDoublyList<Grade> contactGrade = new SortedDoublyList<Grade>();
+			contactGrade.add(grade);
+			this.studentsList.add(new Student(student.getFirstName(), student.getLastName(), contactGrade));
+		}
+
+		private Double calcAvg(SortedDoublyList<Double> values) {
+			Double sum = 0.0;
+			if (values.isEmpty()) {
+				return 0.0;
+			} else {
+				for (Double mark : values) {
+					sum += mark;
+				}
+				return sum.doubleValue() / values.size();
+			}
+		}
+
+		private double calcStdDev(SortedDoublyList<Double> values) {
+			return Math.pow(calcVariance(values), 0.5);
+		}
+
+		private double calcVariance(SortedDoublyList<Double> values) {
+			double total = 0;
+			double sTotal = 0;
+			double scalar = 1 / (double) (values.size());
+			for (int i = 0; i < values.size(); i++) {
+				total += values.get(i);
+				sTotal += Math.pow(values.get(i), 2);
+			}
+			return (scalar * (sTotal - (Math.pow(total, 2) / values.size())));
+		}
+
+		@Override
+		public int compareTo(Test another) {
+			return this.getName().compareTo(another.getName());
+		}
+
+	}
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_padding" >
+
+    <TextView
+        android:id="@+id/display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/large_separator_margin"
+        android:text="@string/hint_test_name"
+        android:textSize="@dimen/huge_font_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/large_separator_margin"
+            android:text="@string/hint_test_n_students" />
+
+        <TextView
+            android:id="@+id/display_num_students"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_test_n_students"
+            android:textSize="@dimen/medium_font_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/large_separator_margin"
+            android:text="@string/hint_test_min" />
+
+        <TextView
+            android:id="@+id/display_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_test_min"
+            android:textSize="@dimen/medium_font_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/large_separator_margin"
+            android:text="@string/hint_test_max" />
+
+        <TextView
+            android:id="@+id/display_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="phone"
+            android:text="@string/hint_test_max"
+            android:textSize="@dimen/medium_font_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/large_separator_margin"
+            android:text="@string/hint_test_avg" />
+
+        <TextView
+            android:id="@+id/display_avg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_test_avg"
+            android:textSize="@dimen/medium_font_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/large_separator_margin"
+            android:text="@string/hint_test_std_dev" />
+
+        <TextView
+            android:id="@+id/display_std_dev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_test_std_dev"
+            android:textSize="@dimen/medium_font_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/grades_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@android:color/transparent" >
+    </ListView>
+
+</LinearLayout>

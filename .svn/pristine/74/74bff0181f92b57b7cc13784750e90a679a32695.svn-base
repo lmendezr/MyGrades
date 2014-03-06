@@ -1,0 +1,145 @@
+package edu.uprm.ece.icom4035.gradesrollbook.managers;
+
+import java.io.IOException;
+
+public class StudentManager {
+
+	private SortedDoublyList<Student> studentsList;
+	private StudentStore studentStore;
+
+	public StudentManager() {
+		try {
+			this.studentStore = new StudentStore();
+			this.studentsList = this.studentStore.loadStudents();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// list operations
+	public SortedDoublyList<Student> getAll() {
+		return this.studentsList;
+	}
+
+	/**
+	 * Get the position of a contact in the SortedArrayList by providing it's
+	 * unique ID.
+	 * 
+	 * @param ID
+	 *            The unique identification of the desired Contact.
+	 * 
+	 * @return The position in the SortedArrayList of the desired Contact.
+	 */
+	public int getStudentPosition(int ID) {
+		for (int i = 0; i < studentsList.size(); ++i) {
+			if (ID == studentsList.get(i).getID()) {
+				return i;
+			}
+		}
+		throw new IllegalArgumentException(
+				"ID doesn't match any contacts in the list.");
+	}
+
+	// student operations
+	public boolean addStudent(Student student) {
+		boolean result = this.studentsList.add(student);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public void editStudent(int studentIndex, Student student) {
+		studentsList.get(studentIndex).editStudent(student);
+		sortContacts();
+		// boolean result = this.studentsList.set(studentIndex, student);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Sorts the entire list of contacts after modifying a specific contact
+	 * details. Avoids errors inside the SortedArrayList since sorting occurs
+	 * only during addition of objects.
+	 */
+	public void sortContacts() {
+		SortedDoublyList<Student> temp = new SortedDoublyList<Student>();
+		for (Student e : this.studentsList) {
+			temp.add(e);
+		}
+		this.studentsList.clear();
+		this.studentsList = temp;
+	}
+
+	public boolean deleteStudent(int studentIndex) {
+		boolean result = this.studentsList.remove(studentIndex);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean deleteStudent(Student student) {
+		boolean result = this.studentsList.remove(student);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public void clearStudents() {
+		this.studentsList.clear();
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// grade operations for a specific student
+	public void addGrade(int studentIndex, Grade grade) {
+		this.studentsList.get(studentIndex).addGrade(grade);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void editGrade(int studentIndex, int gradeIndex, Grade grade) {
+		this.studentsList.get(studentIndex).getGrades().set(gradeIndex, grade);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteGrade(int studentIndex, int gradeIndex) {
+		this.studentsList.get(studentIndex).getGrades().remove(gradeIndex);
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void clearGrades(int studentIndex) {
+		this.studentsList.get(studentIndex).getGrades().clear();
+		try {
+			studentStore.updateFile(studentsList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_padding" >
+
+    <EditText
+        android:id="@+id/edit_first_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hint_first_name"
+        android:inputType="textPersonName" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/edit_last_name_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_first_name_field"
+        android:hint="@string/hint_last_name"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/add_grade_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_last_name_field"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center"
+        android:onClick="addGrade"
+        android:text="@string/button_add_grade"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/grade_selection_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_grade_button"
+        android:layout_marginTop="@dimen/small_separator_margin"
+        android:text="@string/hint_grade_select"
+        android:textSize="@dimen/small_font_size" />
+
+    <ListView
+        android:id="@+id/edit_grades_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/InnerRelativeLayout"
+        android:layout_below="@id/grade_selection_separator"
+        android:layout_marginBottom="@dimen/large_separator_margin"
+        android:layout_marginTop="@dimen/large_separator_margin" />
+
+    <RelativeLayout
+        android:id="@+id/InnerRelativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/discard_student_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_dark"
+            android:onClick="deleteStudent"
+            android:text="@string/button_delete_student"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</RelativeLayout>

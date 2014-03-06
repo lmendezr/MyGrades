@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/small_separator_margin"
+            android:layout_marginTop="@dimen/small_separator_margin"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/display_test_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/hint_grade_name"
+                android:textSize="@dimen/large_font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/display_test_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/large_separator_margin"
+                android:layout_toRightOf="@+id/display_test_name"
+                android:text="@string/hint_grade_score"
+                android:textSize="@dimen/large_font_size"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

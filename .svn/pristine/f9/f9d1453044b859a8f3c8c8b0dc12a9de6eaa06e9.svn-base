@@ -1,0 +1,34 @@
+package edu.uprm.ece.icom4035.gradesrollbook.managers;
+
+public class Grade implements Comparable<Grade> {
+
+	private String gradeName;
+	private double score;
+
+	public Grade(String gradeName, double score) {
+		this.gradeName = gradeName;
+		this.score = score;
+	}
+
+	public String getGradeName() {
+		return gradeName;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	@Override
+	public int compareTo(Grade another) {
+		return this.gradeName.compareTo(another.gradeName);
+	}
+
+}

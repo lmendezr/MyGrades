@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/large_separator_margin"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/display_grade_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/small_separator_margin"
+        android:layout_marginTop="@dimen/small_separator_margin"
+        android:text="@string/hint_grade_name"
+        android:textSize="@dimen/large_font_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/display_grade_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/huge_separator_margin"
+        android:text="@string/hint_grade_score"
+        android:textSize="@dimen/large_font_size"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_action_next_item" />
+
+</RelativeLayout>
